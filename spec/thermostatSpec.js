@@ -39,11 +39,8 @@ describe('Thermostat', function() {
         for (var i = 0; i < 12; i++) {
           thermostat.up();
         }
-
-        expect(thermostat.getTemperature()).toEqual(32);
+       expect(thermostat.getTemperature()).toEqual(32);
     });
-
-
   });
 
   describe('#down', function() {
@@ -60,5 +57,39 @@ describe('Thermostat', function() {
     });
   });
 
+  describe('#reset',function() {
+    it('resets the thermostat temperature to 20 degress',function() {
+      thermostat.reset();
+      expect(thermostat.getTemperature()).toEqual(20);
+    });
+  });
 
+  describe('#currentEnergyUsage',function() {
+    it('says current energy usage is low-usage when temp < 18',
+      function() {
+        for (var i = 0; i < 3; i++) {
+          thermostat.down();
+        }
+      expect(thermostat.currentEnergyUsage()).toEqual('low-usage');
+    });
+
+    it('says current energy usage is medium-usage when temp < 25',
+      function() {
+        for (var i = 0; i < 4; i++) {
+          thermostat.up();
+        }
+      expect(thermostat.currentEnergyUsage()).toEqual('medium-usage');
+    });
+
+    it('says current energy usage is high-usage when temp > 25',
+      function() {
+        for (var i = 0; i < 5; i++) {
+          thermostat.up();
+        }
+      expect(thermostat.currentEnergyUsage()).toEqual('high-usage');
+    });
+
+
+
+  });
 });
