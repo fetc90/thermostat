@@ -10,7 +10,7 @@ Thermostat.prototype.getTemperature = function() {
   return this.temperature;
 };
 
-Thermostat.prototype.up = function(){
+Thermostat.prototype.increaseTemperature = function(){
   var maxTemp;
 
   if (this.powerSavingMode) {
@@ -24,7 +24,7 @@ Thermostat.prototype.up = function(){
   }
 };
 
-Thermostat.prototype.down = function() {
+Thermostat.prototype.decreaseTemperature = function() {
   this.temperature -= 1;
 };
 

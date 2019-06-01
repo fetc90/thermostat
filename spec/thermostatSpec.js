@@ -18,16 +18,16 @@ describe('Thermostat', function() {
   });
 
 
-  describe('#up', function() {
+  describe('#increaseTemperature', function() {
     it('increases the temperature by 1 ', function() {
-      thermostat.up();
+      thermostat.increaseTemperature();
       expect(thermostat.getTemperature()).toEqual(21);
     });
 
     it('cannot increase temperature above 25 if power saving mode is on',
       function() {
         for (var i = 0; i < 5; i++) {
-          thermostat.up();
+          thermostat.increaseTemperature();
         }
 
         expect(thermostat.getTemperature()).toEqual(25);
@@ -37,15 +37,15 @@ describe('Thermostat', function() {
       function() {
         thermostat.switchPowerSavingMode();
         for (var i = 0; i < 12; i++) {
-          thermostat.up();
+          thermostat.increaseTemperature();
         }
        expect(thermostat.getTemperature()).toEqual(32);
     });
   });
 
-  describe('#down', function() {
+  describe('#decreaseTemperature', function() {
     it('decreases the temperature by 1 ', function() {
-      thermostat.down();
+      thermostat.decreaseTemperature();
       expect(thermostat.getTemperature()).toEqual(19);
     });
   });
@@ -68,7 +68,7 @@ describe('Thermostat', function() {
     it('says current energy usage is low-usage when temp < 18',
       function() {
         for (var i = 0; i < 3; i++) {
-          thermostat.down();
+          thermostat.decreaseTemperature();
         }
       expect(thermostat.currentEnergyUsage()).toEqual('low-usage');
     });
@@ -76,15 +76,15 @@ describe('Thermostat', function() {
     it('says current energy usage is medium-usage when temp < 25',
       function() {
         for (var i = 0; i < 4; i++) {
-          thermostat.up();
+          thermostat.increaseTemperature();
         }
       expect(thermostat.currentEnergyUsage()).toEqual('medium-usage');
     });
 
     it('says current energy usage is high-usage when temp > 25',
       function() {
-        for (var i = 0; i < 5; i++) {
-          thermostat.up();
+        for (var i = 0; i < 6; i++) {
+          thermostat.increaseTemperature();
         }
       expect(thermostat.currentEnergyUsage()).toEqual('high-usage');
     });
